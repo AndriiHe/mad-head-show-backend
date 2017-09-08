@@ -2,6 +2,7 @@ package com.incamp.mhs.quiz_score;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class QuizScore {
 
     @Id
@@ -19,6 +21,10 @@ public class QuizScore {
 
     @JsonView(MinimalView.class)
     private Double score;
+
+    public QuizScore(Double score) {
+        this.score = score;
+    }
 
     public interface MinimalView {}
 }
