@@ -2,18 +2,18 @@ package com.incamp.mhs.security;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.GenericFilterBean;
 
-import javax.servlet.*;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-public class JwtAuthenticationFilter implements Filter {
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-    }
+public class JwtAuthenticationFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -23,7 +23,7 @@ public class JwtAuthenticationFilter implements Filter {
         String token = httpServletRequest.getHeader("X-Token");
 
         if (Objects.isNull(token)) {
-            httpResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
@@ -33,9 +33,5 @@ public class JwtAuthenticationFilter implements Filter {
         } catch (JWTVerificationException e) {
             httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
-    }
-
-    @Override
-    public void destroy() {
     }
 }

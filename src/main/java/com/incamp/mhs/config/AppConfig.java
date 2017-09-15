@@ -7,7 +7,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(value = {"com.incamp.mhs.*", "com.incamp.mhs"})
+@ComponentScan(value = {"com.incamp.mhs.*", "com.incamp.mhs", "db.migration"})
 @EnableWebMvc
 @PropertySource("classpath:/application.properties")
 @EnableAspectJAutoProxy(proxyTargetClass = true)

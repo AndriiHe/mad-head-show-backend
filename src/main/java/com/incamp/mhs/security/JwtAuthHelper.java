@@ -24,7 +24,13 @@ class JwtAuthHelper {
     public static final String ROLES = "roles";
 
     static String createJwt(Integer userId, Collection<String> roles) {
-        return JWT.create().withIssuer(ISSUER).withClaim(CLAIM_USER_ID, userId).withArrayClaim("roles", roles.toArray(new String[roles.size()])).withExpiresAt(expiresAt).sign(algorithm);
+        return JWT
+                .create()
+                .withIssuer(ISSUER)
+                .withClaim(CLAIM_USER_ID, userId)
+                .withArrayClaim("roles", roles.toArray(new String[roles.size()]))
+                .withExpiresAt(expiresAt)
+                .sign(algorithm);
     }
 
     static DecodedJWT verifyToken(String token) {
