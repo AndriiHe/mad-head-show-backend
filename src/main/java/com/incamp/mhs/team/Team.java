@@ -21,8 +21,13 @@ public class Team {
     @JsonView(MinimalView.class)
     private String name;
 
-    @ManyToMany(mappedBy = "teams")
+    @JsonView(WithGames.class)
+    @ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER)
     private Collection<Game> games = Collections.emptyList();
 
     public interface MinimalView {}
+
+    ;
+
+    public interface WithGames extends MinimalView, Game.MinimalView {}
 }

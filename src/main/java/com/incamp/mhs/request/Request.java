@@ -1,7 +1,6 @@
 package com.incamp.mhs.request;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.incamp.mhs.team.Team;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,19 +17,16 @@ public class Request {
     private Long id;
 
     @JsonView(MinimalView.class)
-    private String fullName;
+    private String captainName;
 
     @JsonView(MinimalView.class)
-    private String Phone;
+    private String phone;
 
     @JsonView(MinimalView.class)
     private Integer teamSize;
 
     @JsonView(MinimalView.class)
     private Date date;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Team team;
 
     public interface MinimalView {}
 }

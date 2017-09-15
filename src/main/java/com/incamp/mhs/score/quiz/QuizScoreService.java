@@ -17,7 +17,7 @@ public class QuizScoreService {
     }
 
     @Transactional
-    public void create(QuizScore quizScore) {
+    public void save(QuizScore quizScore) {
         quizScoreRepository.persist(quizScore);
     }
 

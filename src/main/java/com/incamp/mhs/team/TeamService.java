@@ -15,7 +15,7 @@ public class TeamService {
     }
 
     @Transactional
-    public void create(Team team) {
+    public void save(Team team) {
         teamRepository.persist(team);
     }
 

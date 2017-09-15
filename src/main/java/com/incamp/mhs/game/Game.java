@@ -2,7 +2,6 @@ package com.incamp.mhs.game;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.incamp.mhs.score.game.GameScore;
 import com.incamp.mhs.season.Season;
 import com.incamp.mhs.team.Team;
 import lombok.Data;
@@ -33,21 +32,25 @@ public class Game {
     @JsonView(MinimalView.class)
     private String location;
 
-    @JsonView(MinimalView.class)
+    @JsonView()
     private Integer currentQuiz;
 
-    @JsonView(MinimalView.class)
+    @JsonView()
     private Integer currentRound;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonView(WithSeason.class)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "season_id")
     private Season season;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private GameScore gameScore;
-
-    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonView(WithTeams.class)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "games_teams", joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
     private Collection<Team> teams = Collections.emptyList();
 
     public interface MinimalView {}
+
+    public interface WithSeason extends MinimalView, Season.MinimalView {}
+
+    public interface WithTeams extends MinimalView, Team.MinimalView {}
 }

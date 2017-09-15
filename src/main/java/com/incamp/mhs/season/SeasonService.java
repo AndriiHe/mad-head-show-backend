@@ -15,7 +15,7 @@ public class SeasonService {
     }
 
     @Transactional
-    public void create(Season season) {
+    public void save(Season season) {
         seasonRepository.persist(season);
     }
 

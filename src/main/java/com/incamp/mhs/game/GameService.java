@@ -15,7 +15,7 @@ public class GameService {
     }
 
     @Transactional
-    public void create(Game game) {
+    public void save(Game game) {
         gameRepository.persist(game);
     }
 

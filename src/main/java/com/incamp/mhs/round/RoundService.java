@@ -15,7 +15,7 @@ public class RoundService {
     }
 
     @Transactional
-    public void create(Round round) {
+    public void save(Round round) {
         roundRepository.persist(round);
     }
 

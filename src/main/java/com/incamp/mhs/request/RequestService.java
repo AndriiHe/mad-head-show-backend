@@ -15,7 +15,7 @@ public class RequestService {
     }
 
     @Transactional
-    public void create(Request request) {
+    public void save(Request request) {
         requestRepository.persist(request);
     }
 
