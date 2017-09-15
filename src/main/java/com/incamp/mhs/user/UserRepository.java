@@ -10,7 +10,10 @@ import java.util.Optional;
 public class UserRepository extends BaseRepository<User, Integer> {
 
     public Optional<User> findOneByUsername(String username) {
-        List<User> users = entityManager.createQuery("SELECT user FROM User AS user WHERE user.username=:username", User.class).setParameter("username", username).getResultList();
+        List<User> users = entityManager
+                .createQuery("SELECT user FROM User AS user WHERE user.username=:username", User.class)
+                .setParameter("username", username)
+                .getResultList();
 
         if (users.isEmpty()) return Optional.empty();
         if (users.size() > 1) throw new IllegalStateException("username is unique property");

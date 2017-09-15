@@ -1,4 +1,4 @@
-package com.incamp.mhs.quiz_score;
+package com.incamp.mhs.score.quiz;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
@@ -15,7 +15,7 @@ public class QuizScore {
     @Id
     @JsonView(MinimalView.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @JsonView(MinimalView.class)
     private Double score;

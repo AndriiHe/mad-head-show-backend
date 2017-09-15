@@ -1,7 +1,10 @@
-package com.incamp.mhs.quiz_score;
+package com.incamp.mhs.score.quiz;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class QuizScoreService {
@@ -13,11 +16,13 @@ public class QuizScoreService {
         this.quizScoreRepository = quizScoreRepository;
     }
 
+    @Transactional
     public void create(QuizScore quizScore) {
         quizScoreRepository.persist(quizScore);
     }
 
-    public QuizScore getById(Integer id) {
-        return quizScoreRepository.findOneByPk(id).orElseThrow(RuntimeException::new);
+    @Transactional(readOnly = true)
+    public QuizScore getById(Long id) {
+        return quizScoreRepository.findOneByPk(id).orElseThrow(EntityNotFoundException::new);
     }
 }

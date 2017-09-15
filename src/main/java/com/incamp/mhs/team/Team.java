@@ -1,9 +1,12 @@
-package com.incamp.mhs.entity;
+package com.incamp.mhs.team;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.incamp.mhs.game.Game;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Data
@@ -17,6 +20,9 @@ public class Team {
 
     @JsonView(MinimalView.class)
     private String name;
+
+    @ManyToMany(mappedBy = "teams")
+    private Collection<Game> games = Collections.emptyList();
 
     public interface MinimalView {}
 }

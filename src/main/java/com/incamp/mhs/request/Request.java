@@ -1,6 +1,7 @@
-package com.incamp.mhs.entity;
+package com.incamp.mhs.request;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.incamp.mhs.team.Team;
 import lombok.Data;
 
 import javax.persistence.*;
