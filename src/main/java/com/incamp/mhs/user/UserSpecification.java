@@ -14,20 +14,8 @@ public class UserSpecification implements EntitySpecification<User> {
 
     private Optional<String> oName = Optional.empty();
 
-    private Optional<Integer> oCountryId = Optional.empty();
-
-    private Optional<Integer> oCityId = Optional.empty();
-
     public void setName(String name) {
         this.oName = Optional.of(name);
-    }
-
-    public void setCountryId(Integer oCountryId) {
-        this.oCountryId = Optional.of(oCountryId);
-    }
-
-    public void setCityId(Integer oCityId) {
-        this.oCityId = Optional.of(oCityId);
     }
 
     @Override
