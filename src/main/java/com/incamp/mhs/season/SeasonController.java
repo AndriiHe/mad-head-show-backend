@@ -2,10 +2,7 @@ package com.incamp.mhs.season;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/seasons")
@@ -22,5 +19,11 @@ public class SeasonController {
     @JsonView(Season.WithGames.class)
     public Season getById(@PathVariable long id) {
         return seasonService.getById(id);
+    }
+
+    @PostMapping()
+    public void createSeason(@RequestBody SeasonForm seasonForm){
+        Season season = seasonForm.toSeason();
+        seasonService.save(season);
     }
 }
