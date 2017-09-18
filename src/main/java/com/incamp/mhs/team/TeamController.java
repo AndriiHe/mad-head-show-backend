@@ -19,7 +19,7 @@ public class TeamController {
     }
 
     @GetMapping("{id}")
-    @JsonView(Team.MinimalView.class)
+    @JsonView(Team.WithRequests.class)
     public Team getById(@PathVariable long id) {
         return teamService.getById(id);
     }

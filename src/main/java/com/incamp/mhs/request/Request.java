@@ -1,6 +1,7 @@
 package com.incamp.mhs.request;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.incamp.mhs.game.Game;
 import com.incamp.mhs.team.Team;
 import lombok.Data;
 
@@ -29,9 +30,17 @@ public class Request {
     @JsonView(MinimalView.class)
     private Date date;
 
-    @JsonView(MinimalView.class)
+    @JsonView(WithTeam.class)
     @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
 
+    @JsonView(WithGame.class)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Game game;
+
     public interface MinimalView {}
+
+    public interface WithGame extends MinimalView, Game.MinimalView {}
+
+    public interface WithTeam extends MinimalView, Team.MinimalView {}
 }
