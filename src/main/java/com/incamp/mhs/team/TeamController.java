@@ -2,10 +2,7 @@ package com.incamp.mhs.team;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/teams")
@@ -22,5 +19,10 @@ public class TeamController {
     @JsonView(Team.WithRequests.class)
     public Team getById(@PathVariable long id) {
         return teamService.getById(id);
+    }
+
+    @PostMapping
+    public void createTeam(@RequestBody TeamForm teamForm){
+        teamService.save(teamForm.toTeam());
     }
 }
