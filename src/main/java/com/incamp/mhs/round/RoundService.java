@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoundService {
@@ -22,5 +24,13 @@ public class RoundService {
     @Transactional(readOnly = true)
     public Round getById(Long id) {
         return roundRepository.findOneByPk(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Transactional
+    public List<Round> getByIndex(Long gameId, Integer index) {
+        RoundSpecification roundSpecification = new RoundSpecification();
+        roundSpecification.setOIndex(Optional.of(index));
+        roundSpecification.setOGameId(Optional.of(gameId));
+        return roundRepository.findBy(roundSpecification);
     }
 }
