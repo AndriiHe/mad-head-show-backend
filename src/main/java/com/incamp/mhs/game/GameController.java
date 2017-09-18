@@ -33,4 +33,10 @@ public class GameController {
     public List<Game> getAll() {
         return gameService.findBy(new GameSpecification());
     }
+
+    @GetMapping("/location/{location}")
+    @JsonView(Game.MinimalView.class)
+    public List<Game> getByLoc(@PathVariable String location) {
+        return gameService.findByLocation(location);
+    }
 }
