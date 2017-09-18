@@ -46,6 +46,18 @@ public class GameController {
     @GetMapping("/open")
     @JsonView(Game.MinimalView.class)
     public List<Game> getOpen() {
-        return gameService.findOpen();
+        return gameService.findByGameStatus(GameStatus.OPEN);
+    }
+
+    @GetMapping("/current")
+    @JsonView(Game.MinimalView.class)
+    public List<Game> getCurrent() {
+        return gameService.findByGameStatus(GameStatus.CURRENT);
+    }
+
+    @GetMapping("/finished")
+    @JsonView(Game.MinimalView.class)
+    public List<Game> getFinished() {
+        return gameService.findByGameStatus(GameStatus.FINISHED);
     }
 }
