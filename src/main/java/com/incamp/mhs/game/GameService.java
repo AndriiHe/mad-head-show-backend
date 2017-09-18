@@ -39,9 +39,9 @@ public class GameService {
     }
 
     @Transactional(readOnly = true)
-    public List<Game> findOpen() {
+    public List<Game> findByGameStatus(GameStatus gameStatus) {
         GameSpecification gameSpecification = new GameSpecification();
-        gameSpecification.setOGameStatus(Optional.of(GameStatus.OPEN));
+        gameSpecification.setOGameStatus(Optional.of(gameStatus));
         return gameRepository.findBy(gameSpecification);
     }
 }
