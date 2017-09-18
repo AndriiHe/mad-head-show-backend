@@ -3,8 +3,6 @@ package com.incamp.mhs.team;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.incamp.mhs.game.Game;
 import lombok.Data;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -24,7 +22,6 @@ public class Team {
     private String name;
 
     @JsonView(WithGames.class)
-    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
     private Collection<Game> games = Collections.emptyList();
 
