@@ -21,7 +21,7 @@ public class GameController {
     }
 
     @GetMapping("{id}")
-    @JsonView(Game.MinimalView.class)
+    @JsonView(Game.WithSeason.class)
     public Game getById(@PathVariable long id) {
         return gameService.getById(id);
     }
