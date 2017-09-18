@@ -6,6 +6,7 @@ import com.incamp.mhs.request.Request;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -20,6 +21,7 @@ public class Team {
     private Long id;
 
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private String name;
 
     @JsonView(WithGames.class)

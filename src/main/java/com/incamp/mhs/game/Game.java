@@ -8,6 +8,7 @@ import com.incamp.mhs.team.Team;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -24,19 +25,24 @@ public class Game {
 
     @JsonFormat(pattern = "dd.MM.yyyy")
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private Date date;
 
     @JsonFormat(pattern = "HH:mm")
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private Date time;
 
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private String location;
 
-    @JsonView()
+    @JsonView(MinimalView.class)
+    @Column(name = "current_quiz", nullable = false)
     private Integer currentQuiz;
 
-    @JsonView()
+    @JsonView(MinimalView.class)
+    @Column(name = "current_round", nullable = false)
     private Integer currentRound;
 
     @JsonView(WithSeason.class)

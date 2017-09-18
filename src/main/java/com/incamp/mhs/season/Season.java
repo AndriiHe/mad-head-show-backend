@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -21,6 +22,7 @@ public class Season {
     private Long id;
 
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private String name;
 
     @JsonView(WithGames.class)

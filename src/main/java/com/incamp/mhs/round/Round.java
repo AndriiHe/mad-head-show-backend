@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -20,20 +21,25 @@ public class Round {
     private Long id;
 
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private Integer index;
 
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private String name;
 
     @JsonView(MinimalView.class)
+    @Column(name = "number_of_quizzes", nullable = false)
     private Integer numberOfQuizzes;
 
     @JsonView(MinimalView.class)
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "round_type", nullable = false)
     private RoundType roundType;
 
     @JsonView(GameView.class)
     @ManyToOne(fetch = FetchType.LAZY)
+    @Column(nullable = false)
     private Game game;
 
     public interface MinimalView {}
