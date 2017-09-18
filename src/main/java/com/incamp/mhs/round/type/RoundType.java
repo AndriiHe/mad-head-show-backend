@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
@@ -17,12 +18,15 @@ public class RoundType {
     private Long id;
 
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private String name;
 
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private Double start;
 
     @JsonView(MinimalView.class)
+    @Column(nullable = false)
     private Double step;
 
     public interface MinimalView {}

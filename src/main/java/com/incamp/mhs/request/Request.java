@@ -6,6 +6,7 @@ import com.incamp.mhs.team.Team;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
@@ -19,12 +20,14 @@ public class Request {
     private Long id;
 
     @JsonView(MinimalView.class)
+    @Column(name = "captain_name")
     private String captainName;
 
     @JsonView(MinimalView.class)
     private String phone;
 
     @JsonView(MinimalView.class)
+    @Column(name = "team_size")
     private Integer teamSize;
 
     @JsonView(MinimalView.class)
@@ -32,6 +35,7 @@ public class Request {
 
     @JsonView(WithTeam.class)
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
     private Team team;
 
     @JsonView(WithGame.class)
