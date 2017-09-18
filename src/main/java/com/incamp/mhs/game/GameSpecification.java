@@ -15,6 +15,7 @@ import java.util.Optional;
 public class GameSpecification implements EntitySpecification<Game> {
 
     private Optional<String> oLocation = Optional.empty();
+    private Optional<GameStatus> oGameStatus = Optional.empty();
 
     @Override
     public CriteriaQuery<Game> toCriteria(CriteriaBuilder cb) {
@@ -25,6 +26,7 @@ public class GameSpecification implements EntitySpecification<Game> {
         List<Predicate> predicateList = new ArrayList<>();
 
         oLocation.ifPresent((location) -> predicateList.add(cb.equal(gameRoot.get("location"), location)));
+        oGameStatus.ifPresent((gameStatus) -> predicateList.add(cb.equal(gameRoot.get("gameStatus"), gameStatus)));
         Predicate mainPredicate = cb.and(predicateList.toArray(new Predicate[predicateList.size()]));
 
         return gameCriteriaQuery.where(mainPredicate);

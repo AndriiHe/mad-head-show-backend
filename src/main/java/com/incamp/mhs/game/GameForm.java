@@ -33,6 +33,7 @@ public class GameForm {
         game.setCurrentQuiz(1);
         game.setCurrentRound(1);
         game.setLocation(location);
+        game.setGameStatus(GameStatus.OPEN);
         if (seasonId != null) {
             Season season = new Season();
             season.setId(seasonId);

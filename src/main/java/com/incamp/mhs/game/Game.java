@@ -47,7 +47,8 @@ public class Game {
 
     @JsonView(MinimalView.class)
     @Column(name = "game_status")
-    private String gameStatus;
+    @Enumerated(value = EnumType.ORDINAL)
+    private GameStatus gameStatus;
 
     @JsonView(WithSeason.class)
     @ManyToOne(fetch = FetchType.LAZY)

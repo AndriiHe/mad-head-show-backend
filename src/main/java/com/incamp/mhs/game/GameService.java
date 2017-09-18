@@ -37,4 +37,11 @@ public class GameService {
         gameSpecification.setOLocation(Optional.of(location));
         return gameRepository.findBy(gameSpecification);
     }
+
+    @Transactional(readOnly = true)
+    public List<Game> findOpen() {
+        GameSpecification gameSpecification = new GameSpecification();
+        gameSpecification.setOGameStatus(Optional.of(GameStatus.OPEN));
+        return gameRepository.findBy(gameSpecification);
+    }
 }

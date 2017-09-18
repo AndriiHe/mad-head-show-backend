@@ -38,8 +38,14 @@ public class GameController {
     }
 
     @PostMapping()
-    public void createGame(@RequestBody GameForm gameForm) {
+    public void create(@RequestBody GameForm gameForm) {
         Game game = gameForm.toGame();
         gameService.save(game);
+    }
+
+    @GetMapping("/open")
+    @JsonView(Game.MinimalView.class)
+    public List<Game> getOpen() {
+        return gameService.findOpen();
     }
 }
