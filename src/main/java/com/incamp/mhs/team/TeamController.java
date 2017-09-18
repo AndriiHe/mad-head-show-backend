@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/teams")
 @Transactional
@@ -21,8 +23,14 @@ public class TeamController {
         return teamService.getById(id);
     }
 
+    @GetMapping
+    @JsonView(Team.MinimalView.class)
+    public List<Team> getAllTeams() {
+        return teamService.getAllTeams();
+    }
+
     @PostMapping
-    public void createTeam(@RequestBody TeamForm teamForm){
+    public void createTeam(@RequestBody TeamForm teamForm) {
         teamService.save(teamForm.toTeam());
     }
 }
