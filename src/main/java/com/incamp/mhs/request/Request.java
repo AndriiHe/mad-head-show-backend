@@ -1,6 +1,7 @@
 package com.incamp.mhs.request;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.incamp.mhs.team.Team;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,6 +28,10 @@ public class Request {
 
     @JsonView(MinimalView.class)
     private Date date;
+
+    @JsonView(MinimalView.class)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Team team;
 
     public interface MinimalView {}
 }

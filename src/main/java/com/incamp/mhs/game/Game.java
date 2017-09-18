@@ -2,6 +2,7 @@ package com.incamp.mhs.game;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.incamp.mhs.round.Round;
 import com.incamp.mhs.season.Season;
 import com.incamp.mhs.team.Team;
 import lombok.Data;
@@ -48,9 +49,15 @@ public class Game {
     @JoinTable(name = "games_teams", joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
     private Collection<Team> teams = Collections.emptyList();
 
+    @JsonView(WithRounds.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.ALL)
+    private Collection<Round> rounds = Collections.emptyList();
+
     public interface MinimalView {}
 
     public interface WithSeason extends MinimalView, Season.MinimalView {}
 
     public interface WithTeams extends MinimalView, Team.MinimalView {}
+
+    public interface WithRounds extends MinimalView, Round.MinimalView {}
 }
