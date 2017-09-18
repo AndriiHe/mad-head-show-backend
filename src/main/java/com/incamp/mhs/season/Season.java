@@ -24,14 +24,10 @@ public class Season {
     private String name;
 
     @JsonView(WithGames.class)
-    @OneToMany(mappedBy = "season", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "season", fetch = FetchType.LAZY)
     private Collection<Game> games = Collections.emptyList();
 
     public interface MinimalView {}
 
-    ;
-
     public interface WithGames extends MinimalView, Game.MinimalView {}
-
-    ;
 }

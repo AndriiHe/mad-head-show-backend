@@ -22,7 +22,7 @@ public class Team {
     private String name;
 
     @JsonView(WithGames.class)
-    @ManyToMany(mappedBy = "teams", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
     private Collection<Game> games = Collections.emptyList();
 
     public interface MinimalView {}
