@@ -34,7 +34,7 @@ public class Request {
 
     @JsonView(MinimalView.class)
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private Team team;
 
     public interface MinimalView {}

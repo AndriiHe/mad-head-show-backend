@@ -39,7 +39,7 @@ public class Round {
 
     @JsonView(GameView.class)
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private Game game;
 
     public interface MinimalView {}
