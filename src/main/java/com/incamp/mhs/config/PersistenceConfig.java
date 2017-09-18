@@ -78,6 +78,7 @@ public class PersistenceConfig {
                 setProperty("hibernate.globally_quoted_identifiers", "true");
                 setProperty("hibernate.naming.strategy", env.getProperty("hibernate.naming.strategy"));
                 setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+                setProperty("hibernate.enable_lazy_load_no_trans", "true");
             }
         };
     }
