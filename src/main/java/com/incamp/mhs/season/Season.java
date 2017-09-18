@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -26,7 +25,7 @@ public class Season {
     private String name;
 
     @JsonView(WithGames.class)
-    @OneToMany(mappedBy = "season", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "season", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Collection<Game> games = Collections.emptyList();
 
     public interface MinimalView {}
