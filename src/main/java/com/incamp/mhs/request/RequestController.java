@@ -1,10 +1,7 @@
 package com.incamp.mhs.request;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/requests")
@@ -22,4 +19,8 @@ public class RequestController {
         return requestService.getById(id);
     }
 
+    @PostMapping
+    public void save(@RequestBody RequestForm requestForm) {
+        requestService.save(requestForm.toRequest());
+    }
 }
