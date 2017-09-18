@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.incamp.mhs.season.Season;
 import com.incamp.mhs.team.Team;
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -44,7 +46,8 @@ public class Game {
     private Season season;
 
     @JsonView(WithTeams.class)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "games_teams", joinColumns = @JoinColumn(name = "game_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"))
     private Collection<Team> teams = Collections.emptyList();
 

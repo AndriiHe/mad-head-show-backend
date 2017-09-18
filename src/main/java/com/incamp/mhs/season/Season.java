@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.incamp.mhs.game.Game;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -24,14 +26,11 @@ public class Season {
     private String name;
 
     @JsonView(WithGames.class)
-    @OneToMany(mappedBy = "season", fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "season", fetch = FetchType.LAZY)
     private Collection<Game> games = Collections.emptyList();
 
     public interface MinimalView {}
 
-    ;
-
     public interface WithGames extends MinimalView, Game.MinimalView {}
-
-    ;
 }
