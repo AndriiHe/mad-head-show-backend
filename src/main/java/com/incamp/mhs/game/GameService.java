@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -17,8 +18,50 @@ public class GameService {
     }
 
     @Transactional
-    public void save(Game game) {
+    public void save(GameForm gameForm) {
+        Game gameFromDto = gameForm.toGame();
+        Game game;
+        if (Objects.nonNull(gameFromDto.getId())) {
+            game = copyGameFromDto(gameFromDto);
+        } else {
+            game = gameFromDto;
+        }
+
         gameRepository.persist(game);
+    }
+
+    private Game copyGameFromDto(Game gameFromDto) {
+        Game game;
+        game = getById(gameFromDto.getId());
+
+        if (Objects.nonNull(gameFromDto.getLocation())) {
+            game.setLocation(gameFromDto.getLocation());
+        }
+
+        if (Objects.nonNull(gameFromDto.getDate())) {
+            game.setDate(gameFromDto.getDate());
+        }
+
+        if (Objects.nonNull(gameFromDto.getTime())) {
+            game.setTime(gameFromDto.getTime());
+        }
+
+        if (Objects.nonNull(gameFromDto.getGameStatus())) {
+            game.setGameStatus(gameFromDto.getGameStatus());
+        }
+
+        if (Objects.nonNull(gameFromDto.getCurrentQuiz())) {
+            game.setCurrentQuiz(gameFromDto.getCurrentQuiz());
+        }
+
+        if (Objects.nonNull(gameFromDto.getCurrentRound())) {
+            game.setCurrentRound(gameFromDto.getCurrentRound());
+        }
+
+        if (Objects.nonNull(gameFromDto.getSeason())) {
+            game.setSeason(gameFromDto.getSeason());
+        }
+        return game;
     }
 
     @Transactional(readOnly = true)

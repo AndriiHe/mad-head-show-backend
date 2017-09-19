@@ -38,9 +38,8 @@ public class GameController {
     }
 
     @PostMapping()
-    public void create(@RequestBody GameForm gameForm) {
-        Game game = gameForm.toGame();
-        gameService.save(game);
+    public void create(@RequestBody GameCreateForm gameCreateForm) {
+        gameService.save(gameCreateForm);
     }
 
     @GetMapping("/open")
@@ -59,5 +58,11 @@ public class GameController {
     @JsonView(Game.MinimalView.class)
     public List<Game> getFinished() {
         return gameService.findByGameStatus(GameStatus.FINISHED);
+    }
+
+    @PutMapping("{id}")
+    public void updateGame(@PathVariable long id, @RequestBody GameUpdateForm gameUpdateForm) {
+        gameUpdateForm.setId(id);
+        gameService.save(gameUpdateForm);
     }
 }
