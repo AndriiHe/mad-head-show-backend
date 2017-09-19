@@ -6,25 +6,26 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Objects;
 
 @Getter
 @Setter
 public class GameForm {
 
     @NotBlank
-    String location;
+    private String location;
 
     @NotBlank
     @JsonFormat(pattern = "dd.MM.yyyy")
-    Date date;
+    private LocalDate date;
 
     @NotBlank
     @JsonFormat(pattern = "HH:mm")
-    Date time;
+    private LocalTime time;
 
-    Long seasonId;
-
+    private Long seasonId;
 
     public Game toGame() {
         Game game = new Game();
@@ -34,7 +35,7 @@ public class GameForm {
         game.setCurrentRound(1);
         game.setLocation(location);
         game.setGameStatus(GameStatus.OPEN);
-        if (seasonId != null) {
+        if (Objects.nonNull(seasonId)) {
             Season season = new Season();
             season.setId(seasonId);
             game.setSeason(season);
