@@ -1,10 +1,12 @@
 package com.incamp.mhs.game;
 
+import com.incamp.mhs.season.SeasonService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -12,12 +14,18 @@ public class GameService {
 
     private final GameRepository gameRepository;
 
-    public GameService(GameRepository gameRepository) {
+    private final SeasonService seasonService;
+
+    public GameService(GameRepository gameRepository, SeasonService seasonService) {
         this.gameRepository = gameRepository;
+        this.seasonService = seasonService;
     }
 
     @Transactional
     public void save(Game game) {
+        if (Objects.nonNull(game.getSeason())) {
+            seasonService.getById(game.getSeason().getId());
+        }
         gameRepository.persist(game);
     }
 

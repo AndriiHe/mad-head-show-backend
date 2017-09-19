@@ -48,7 +48,7 @@ public class Game {
 
     @JsonView(MinimalView.class)
     @Column(name = "game_status")
-    @Enumerated(value = EnumType.ORDINAL)
+    @Enumerated(value = EnumType.STRING)
     private GameStatus gameStatus;
 
     @JsonView(WithSeason.class)

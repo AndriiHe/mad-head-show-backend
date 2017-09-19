@@ -39,8 +39,7 @@ public class GameController {
 
     @PostMapping()
     public void create(@RequestBody GameForm gameForm) {
-        Game game = gameForm.toGame();
-        gameService.save(game);
+        gameService.save(gameForm.toGame());
     }
 
     @GetMapping("/open")
