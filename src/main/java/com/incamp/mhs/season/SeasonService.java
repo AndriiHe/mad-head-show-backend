@@ -21,6 +21,6 @@ public class SeasonService {
 
     @Transactional(readOnly = true)
     public Season getById(Long id) {
-        return seasonRepository.findOneByPk(id).orElseThrow(EntityNotFoundException::new);
+        return seasonRepository.findOneByPk(id).orElseThrow(() -> new EntityNotFoundException("Season not found"));
     }
 }

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class TeamForm {
     @NotBlank
-    String name;
+    private String name;
 
     public Team toTeam(){
         Team team = new Team();

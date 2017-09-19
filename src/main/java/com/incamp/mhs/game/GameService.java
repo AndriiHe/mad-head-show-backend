@@ -1,5 +1,6 @@
 package com.incamp.mhs.game;
 
+import com.incamp.mhs.season.SeasonService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +14,11 @@ public class GameService {
 
     private final GameRepository gameRepository;
 
-    public GameService(GameRepository gameRepository) {
+    private final SeasonService seasonService;
+
+    public GameService(GameRepository gameRepository, SeasonService seasonService) {
         this.gameRepository = gameRepository;
+        this.seasonService = seasonService;
     }
 
     @Transactional
@@ -26,7 +30,9 @@ public class GameService {
         } else {
             game = gameFromDto;
         }
-
+        if (Objects.nonNull(game.getSeason())) {
+            seasonService.getById(game.getSeason().getId());
+        }
         gameRepository.persist(game);
     }
 

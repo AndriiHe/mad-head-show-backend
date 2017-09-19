@@ -9,9 +9,10 @@ import com.incamp.mhs.team.Team;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 
 @Entity
 @Data
@@ -26,12 +27,12 @@ public class Game {
     @JsonFormat(pattern = "dd.MM.yyyy")
     @JsonView(MinimalView.class)
     @Column(nullable = false)
-    private Date date;
+    private LocalDate date;
 
     @JsonFormat(pattern = "HH:mm")
     @JsonView(MinimalView.class)
     @Column(nullable = false)
-    private Date time;
+    private LocalTime time;
 
     @JsonView(MinimalView.class)
     @Column(nullable = false)
@@ -47,7 +48,7 @@ public class Game {
 
     @JsonView(MinimalView.class)
     @Column(name = "game_status")
-    @Enumerated(value = EnumType.ORDINAL)
+    @Enumerated(value = EnumType.STRING)
     private GameStatus gameStatus;
 
     @JsonView(WithSeason.class)
