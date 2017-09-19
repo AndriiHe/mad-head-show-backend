@@ -72,7 +72,7 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public Game getById(Long id) {
-        return gameRepository.findOneByPk(id).orElseThrow(EntityNotFoundException::new);
+        return gameRepository.findOneByPk(id).orElseThrow(() -> new EntityNotFoundException("Game not found"));
     }
 
     @Transactional(readOnly = true)

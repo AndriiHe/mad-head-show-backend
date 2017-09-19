@@ -1,6 +1,7 @@
 package com.incamp.mhs.score.quiz;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.incamp.mhs.game.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +15,12 @@ import java.util.Map;
 public class QuizScoreController {
 
     private final QuizScoreService quizScoreService;
+    private final GameService gameService;
 
     @Autowired
-    public QuizScoreController(QuizScoreService quizScoreService) {
+    public QuizScoreController(QuizScoreService quizScoreService, GameService gameService) {
         this.quizScoreService = quizScoreService;
+        this.gameService = gameService;
     }
 
     @GetMapping("/round/{roundIndex}/quiz/{quizIndex}")
@@ -37,7 +40,10 @@ public class QuizScoreController {
             qForm.setRoundIndex(Integer.parseInt(pathVars.get("roundIndex")));
             qForm.setQuizIndex(Integer.parseInt(pathVars.get("quizIndex")));
 
-            quizScoreService.save(qForm.toQuizScore());
+            QuizScore quizScore = qForm.toQuizScore();
+            quizScore.setGame(gameService.getById(qForm.getGameId()));
+
+            quizScoreService.save(quizScore);
         }
     }
 
