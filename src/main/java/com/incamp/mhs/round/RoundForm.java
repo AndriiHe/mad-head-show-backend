@@ -6,11 +6,16 @@ import lombok.Data;
 
 @Data
 public class RoundForm {
-    String name;
-    Long roundTypeId;
-    Integer index;
-    Integer numberOfQuizzes;
-    Long gameId;
+
+    private String name;
+
+    private Long roundTypeId;
+
+    private Integer index;
+
+    private Integer numberOfQuizzes;
+
+    private Long gameId;
 
     public Round toRound() {
         Round round = new Round();

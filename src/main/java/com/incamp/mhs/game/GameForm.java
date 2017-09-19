@@ -13,17 +13,17 @@ import java.util.Date;
 public class GameForm {
 
     @NotBlank
-    String location;
+    private String location;
 
     @NotBlank
     @JsonFormat(pattern = "dd.MM.yyyy")
-    Date date;
+    private Date date;
 
     @NotBlank
     @JsonFormat(pattern = "HH:mm")
-    Date time;
+    private Date time;
 
-    Long seasonId;
+    private Long seasonId;
 
 
     public Game toGame() {

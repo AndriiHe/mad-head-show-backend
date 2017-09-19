@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class SeasonForm {
     @NotBlank
-    String name;
+    private String name;
 
 
     public Season toSeason(){
