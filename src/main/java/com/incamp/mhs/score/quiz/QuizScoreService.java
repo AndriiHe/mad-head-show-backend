@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuizScoreService {
@@ -25,4 +27,14 @@ public class QuizScoreService {
     public QuizScore getById(Long id) {
         return quizScoreRepository.findOneByPk(id).orElseThrow(EntityNotFoundException::new);
     }
+
+    @Transactional(readOnly = true)
+    public List<QuizScore> getByRoundIndexAndQuizIndex(Integer gameId, Integer roundIndex, Integer quizIndex) {
+        QuizScoreSpecification quizScoreSpecification = new QuizScoreSpecification();
+        quizScoreSpecification.setOGame(Optional.of(gameId));
+        quizScoreSpecification.setORoundIndex(Optional.of(roundIndex));
+        quizScoreSpecification.setOQuizIndex(Optional.of(quizIndex));
+        return quizScoreRepository.findBy(quizScoreSpecification);
+    }
+
 }

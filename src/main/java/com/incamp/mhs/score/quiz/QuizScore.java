@@ -1,6 +1,8 @@
 package com.incamp.mhs.score.quiz;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.incamp.mhs.game.Game;
+import com.incamp.mhs.team.Team;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,9 +22,20 @@ public class QuizScore {
     @JsonView(MinimalView.class)
     private Double score;
 
-    public QuizScore(Double score) {
-        this.score = score;
-    }
+    @JsonView(MinimalView.class)
+    private Integer quizIndex;
 
-    public interface MinimalView {}
+    @JsonView(MinimalView.class)
+    private Integer roundIndex;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonView(MinimalView.class)
+    private Team team;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonView(MinimalView.class)
+    private Game game;
+
+    public interface MinimalView extends Team.MinimalView, Game.MinimalView {
+    }
 }

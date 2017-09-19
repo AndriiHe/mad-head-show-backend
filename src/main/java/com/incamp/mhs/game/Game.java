@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.incamp.mhs.request.Request;
 import com.incamp.mhs.round.Round;
+import com.incamp.mhs.score.quiz.QuizScore;
 import com.incamp.mhs.season.Season;
 import com.incamp.mhs.team.Team;
 import lombok.Data;
@@ -69,6 +70,10 @@ public class Game {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.ALL)
     private Collection<Request> requests = Collections.emptyList();
 
+    @JsonView(WithScores.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "game", cascade = CascadeType.ALL)
+    private Collection<QuizScore> scores = Collections.emptyList();
+
     public interface MinimalView {}
 
     public interface WithSeason extends MinimalView, Season.MinimalView {}
@@ -78,4 +83,7 @@ public class Game {
     public interface WithRounds extends MinimalView, Round.MinimalView {}
 
     public interface WithRequests extends MinimalView, Request.MinimalView {}
+
+    public interface WithScores extends MinimalView, QuizScore.MinimalView {
+    }
 }
