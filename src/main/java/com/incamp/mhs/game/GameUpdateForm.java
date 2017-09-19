@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.incamp.mhs.season.Season;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 @Data
@@ -15,10 +16,10 @@ public class GameUpdateForm implements GameForm {
     private String location;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
-    private Date date;
+    private LocalDate date;
 
     @JsonFormat(pattern = "HH:mm")
-    private Date time;
+    private LocalTime time;
 
     private GameStatus gameStatus;
 

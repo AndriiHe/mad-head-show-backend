@@ -1,5 +1,7 @@
 package com.incamp.mhs;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,6 +24,7 @@ public abstract class BaseRepository<Entity, Pk> {
         entityManager.remove(entity);
     }
 
+    @Transactional
     public void persist(Entity entity) {
         entityManager.persist(entity);
     }

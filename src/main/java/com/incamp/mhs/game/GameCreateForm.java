@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -17,11 +18,11 @@ public class GameCreateForm implements GameForm {
 
     @NotBlank
     @JsonFormat(pattern = "dd.MM.yyyy")
-    private Date date;
+    private LocalDate date;
 
     @NotBlank
     @JsonFormat(pattern = "HH:mm")
-    private Date time;
+    private LocalTime time;
 
     private Long seasonId;
 
