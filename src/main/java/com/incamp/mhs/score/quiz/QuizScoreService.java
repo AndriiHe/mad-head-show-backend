@@ -29,11 +29,37 @@ public class QuizScoreService {
     }
 
     @Transactional(readOnly = true)
-    public List<QuizScore> getByRoundIndexAndQuizIndex(Integer gameId, Integer roundIndex, Integer quizIndex) {
+    public List<QuizScore> getByRoundIndexAndQuizIndex(Long gameId, Integer roundIndex, Integer quizIndex) {
         QuizScoreSpecification quizScoreSpecification = new QuizScoreSpecification();
         quizScoreSpecification.setOGame(Optional.of(gameId));
         quizScoreSpecification.setORoundIndex(Optional.of(roundIndex));
         quizScoreSpecification.setOQuizIndex(Optional.of(quizIndex));
+        return quizScoreRepository.findBy(quizScoreSpecification);
+    }
+
+    @Transactional(readOnly = true)
+    public List<QuizScore> getByRoundIndex(Long gameId, Integer roundIndex) {
+        QuizScoreSpecification quizScoreSpecification = new QuizScoreSpecification();
+        quizScoreSpecification.setOGame(Optional.of(gameId));
+        quizScoreSpecification.setORoundIndex(Optional.of(roundIndex));
+
+        return quizScoreRepository.findBy(quizScoreSpecification);
+    }
+
+    @Transactional(readOnly = true)
+    public List<QuizScore> getByGameId(Long gameId) {
+        QuizScoreSpecification quizScoreSpecification = new QuizScoreSpecification();
+        quizScoreSpecification.setOGame(Optional.of(gameId));
+
+        return quizScoreRepository.findBy(quizScoreSpecification);
+    }
+
+    @Transactional(readOnly = true)
+    public List<QuizScore> getByTeamId(Long gameId, Long teamId) {
+        QuizScoreSpecification quizScoreSpecification = new QuizScoreSpecification();
+        quizScoreSpecification.setOGame(Optional.of(gameId));
+        quizScoreSpecification.setOTeam(Optional.of(teamId));
+
         return quizScoreRepository.findBy(quizScoreSpecification);
     }
 

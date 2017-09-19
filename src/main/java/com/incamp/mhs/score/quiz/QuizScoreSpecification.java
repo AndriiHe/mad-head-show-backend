@@ -16,7 +16,8 @@ public class QuizScoreSpecification implements EntitySpecification<QuizScore> {
 
     private Optional<Integer> oQuizIndex = Optional.empty();
     private Optional<Integer> oRoundIndex = Optional.empty();
-    private Optional<Integer> oGame = Optional.empty();
+    private Optional<Long> oGame = Optional.empty();
+    private Optional<Long> oTeam = Optional.empty();
 
 
     @Override
@@ -28,6 +29,7 @@ public class QuizScoreSpecification implements EntitySpecification<QuizScore> {
         List<Predicate> predicateList = new ArrayList<>();
 
         oGame.ifPresent(gameId -> predicateList.add(cb.equal(quizScoreRoot.get("game"), gameId)));
+        oTeam.ifPresent(teamId -> predicateList.add(cb.equal(quizScoreRoot.get("team"), teamId)));
         oQuizIndex.ifPresent(index -> predicateList.add(cb.equal(quizScoreRoot.get("quizIndex"), index)));
         oRoundIndex.ifPresent(roundIndex -> predicateList.add(cb.equal(quizScoreRoot.get("roundIndex"), roundIndex)));
         Predicate mainPredicate = cb.and(predicateList.toArray(new Predicate[predicateList.size()]));

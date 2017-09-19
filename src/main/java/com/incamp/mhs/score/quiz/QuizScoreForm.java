@@ -4,6 +4,8 @@ import com.incamp.mhs.game.Game;
 import com.incamp.mhs.team.Team;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 public class QuizScoreForm {
 
@@ -15,6 +17,7 @@ public class QuizScoreForm {
 
     private Long teamId;
 
+    @NotBlank
     private Double score;
 
     public QuizScore toQuizScore() {
