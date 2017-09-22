@@ -6,7 +6,7 @@ import com.incamp.mhs.team.Team;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -30,10 +30,15 @@ public class Request {
     private Integer teamSize;
 
     @JsonView(MinimalView.class)
-    private Date date;
+    @Column(name = "request_status")
+    @Enumerated(value = EnumType.STRING)
+    private RequestStatus requestStatus;
+
+    @JsonView(MinimalView.class)
+    private LocalDate date;
 
     @JsonView(WithTeam.class)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Team team;
 
     @JsonView(WithGame.class)

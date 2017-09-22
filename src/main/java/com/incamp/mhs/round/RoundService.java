@@ -33,4 +33,10 @@ public class RoundService {
         roundSpecification.setOGameId(Optional.of(gameId));
         return roundRepository.findBy(roundSpecification);
     }
+
+    public List<Round> getByGameId(Long gameId) {
+        RoundSpecification roundSpecification = new RoundSpecification();
+        roundSpecification.setOGameId(Optional.of(gameId));
+        return roundRepository.findBy(roundSpecification);
+    }
 }

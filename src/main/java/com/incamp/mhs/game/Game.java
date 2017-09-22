@@ -22,20 +22,20 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(MinimalView.class)
+    @JsonView({MinimalView.class, GameListView.class})
     private Long id;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
-    @JsonView(MinimalView.class)
+    @JsonView({MinimalView.class, GameListView.class})
     @Column(nullable = false)
     private LocalDate date;
 
     @JsonFormat(pattern = "HH:mm")
-    @JsonView(MinimalView.class)
+    @JsonView({MinimalView.class, GameListView.class})
     @Column(nullable = false)
     private LocalTime time;
 
-    @JsonView(MinimalView.class)
+    @JsonView({MinimalView.class, GameListView.class})
     @Column(nullable = false)
     private String location;
 
@@ -52,7 +52,7 @@ public class Game {
     @Enumerated(value = EnumType.STRING)
     private GameStatus gameStatus;
 
-    @JsonView(WithSeason.class)
+    @JsonView({MinimalView.class, GameListView.class})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "season_id")
     private Season season;
@@ -75,6 +75,9 @@ public class Game {
     private Collection<QuizScore> scores = Collections.emptyList();
 
     public interface MinimalView {}
+
+    public interface GameListView extends Season.MinimalView {
+    }
 
     public interface WithSeason extends MinimalView, Season.MinimalView {}
 

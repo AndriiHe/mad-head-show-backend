@@ -21,6 +21,6 @@ public class RoundTypeService {
 
     @Transactional(readOnly = true)
     public RoundType getById(Long id) {
-        return roundTypeRepository.findOneByPk(id).orElseThrow(EntityNotFoundException::new);
+        return roundTypeRepository.findOneByPk(id).orElseThrow(() -> new EntityNotFoundException("Round type not find"));
     }
 }

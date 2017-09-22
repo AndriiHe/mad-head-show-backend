@@ -1,11 +1,11 @@
 package com.incamp.mhs.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.incamp.mhs.game.Game;
+import com.incamp.mhs.team.Team;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class RequestForm {
@@ -23,8 +23,7 @@ public class RequestForm {
     private Integer teamSize;
 
     @NotBlank
-    @JsonFormat(pattern = "dd.MM.yyyy")
-    private Date date;
+    private String teamName;
 
     public Request toRequest() {
         Request request = new Request();
@@ -32,10 +31,15 @@ public class RequestForm {
         Game game = new Game();
         game.setId(gameId);
 
+        Team team = new Team();
+        team.setName(teamName);
+        request.setTeam(team);
+
+        request.setRequestStatus(RequestStatus.UNCONFIRMED);
         request.setCaptainName(captainName);
         request.setPhone(phone);
         request.setTeamSize(teamSize);
-        request.setDate(date);
+        request.setDate(LocalDate.now());
         request.setGame(game);
 
         return request;

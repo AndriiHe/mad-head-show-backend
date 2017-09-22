@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TeamService {
@@ -28,6 +29,15 @@ public class TeamService {
     @Transactional(readOnly = true)
     public List<Team> getAllTeams() {
         TeamSpecification teamSpecification = new TeamSpecification();
+        return teamRepository.findBy(teamSpecification);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Team> getByTeamName(String teamName) {
+        TeamSpecification teamSpecification = new TeamSpecification();
+        teamSpecification.setOName(Optional.of(teamName));
+        Team newTeam = new Team();
+        newTeam.setName(teamName);
         return teamRepository.findBy(teamSpecification);
     }
 }
