@@ -20,7 +20,13 @@ public class RequestController {
     }
 
     @PostMapping
-    public void save(@RequestBody RequestForm requestForm) {
-        requestService.save(requestForm.toRequest());
+    public void save(@RequestBody RequestCreateForm requestForm) {
+        requestService.save(requestForm);
+    }
+
+    @PostMapping("{id}")
+    public void updateRequestStatus(@PathVariable long id, @RequestBody RequestUpdateForm requestForm) {
+        requestForm.setId(id);
+        requestService.save(requestForm);
     }
 }
