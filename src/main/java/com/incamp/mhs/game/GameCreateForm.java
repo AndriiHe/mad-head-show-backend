@@ -11,7 +11,7 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
-public class GameCreateForm implements GameForm {
+public class GameCreateForm {
 
     @NotBlank
     private String location;
@@ -26,8 +26,6 @@ public class GameCreateForm implements GameForm {
 
     private Long seasonId;
 
-
-    @Override
     public Game toGame() {
         Game game = new Game();
         game.setDate(date);

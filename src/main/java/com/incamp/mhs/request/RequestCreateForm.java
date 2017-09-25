@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Data
-public class RequestCreateForm implements RequestForm {
+public class RequestCreateForm {
 
     @NotBlank
     private Long gameId;
@@ -25,7 +25,6 @@ public class RequestCreateForm implements RequestForm {
     @NotBlank
     private String teamName;
 
-    @Override
     public Request toRequest() {
         Request request = new Request();
 

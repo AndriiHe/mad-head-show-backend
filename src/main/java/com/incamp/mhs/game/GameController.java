@@ -39,7 +39,7 @@ public class GameController {
 
     @PostMapping()
     public void create(@RequestBody GameCreateForm gameCreateForm) {
-        gameService.save(gameCreateForm);
+        gameService.save(gameCreateForm.toGame());
     }
 
     @GetMapping("/open")
@@ -62,7 +62,6 @@ public class GameController {
 
     @PutMapping("{id}")
     public void updateGame(@PathVariable long id, @RequestBody GameUpdateForm gameUpdateForm) {
-        gameUpdateForm.setId(id);
-        gameService.save(gameUpdateForm);
+        gameService.update(id, gameUpdateForm.toGame());
     }
 }

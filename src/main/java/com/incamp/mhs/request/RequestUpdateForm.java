@@ -3,9 +3,7 @@ package com.incamp.mhs.request;
 import lombok.Data;
 
 @Data
-public class RequestUpdateForm implements RequestForm {
-
-    private Long id;
+public class RequestUpdateForm {
 
     private String captainName;
 
@@ -15,11 +13,9 @@ public class RequestUpdateForm implements RequestForm {
 
     private RequestStatus requestStatus;
 
-    @Override
     public Request toRequest() {
         Request request = new Request();
 
-        request.setId(id);
         request.setRequestStatus(requestStatus);
         request.setCaptainName(captainName);
         request.setPhone(phone);

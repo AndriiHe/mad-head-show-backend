@@ -21,12 +21,11 @@ public class RequestController {
 
     @PostMapping
     public void save(@RequestBody RequestCreateForm requestForm) {
-        requestService.save(requestForm);
+        requestService.save(requestForm.toRequest());
     }
 
-    @PostMapping("{id}")
+    @PutMapping("{id}")
     public void updateRequestStatus(@PathVariable long id, @RequestBody RequestUpdateForm requestForm) {
-        requestForm.setId(id);
-        requestService.save(requestForm);
+        requestService.update(id, requestForm.toRequest());
     }
 }

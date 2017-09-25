@@ -9,9 +9,7 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 @Data
-public class GameUpdateForm implements GameForm {
-
-    private Long id;
+public class GameUpdateForm {
 
     private String location;
 
@@ -29,12 +27,9 @@ public class GameUpdateForm implements GameForm {
 
     private Long seasonId;
 
-
-    @Override
     public Game toGame() {
         Game game = new Game();
 
-        game.setId(id);
         game.setLocation(location);
         game.setDate(date);
         game.setTime(time);
