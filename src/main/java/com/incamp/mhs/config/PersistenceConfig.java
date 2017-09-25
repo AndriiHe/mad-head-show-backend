@@ -12,7 +12,6 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
@@ -57,12 +56,12 @@ public class PersistenceConfig {
         return em;
     }
 
+    @Autowired
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emf);
-
-        return transactionManager;
+    public JpaTransactionManager jpaTransactionManager(EntityManagerFactory emf) {
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        jpaTransactionManager.setEntityManagerFactory(emf);
+        return jpaTransactionManager;
     }
 
     @Bean
@@ -78,7 +77,6 @@ public class PersistenceConfig {
                 setProperty("hibernate.globally_quoted_identifiers", "true");
                 setProperty("hibernate.naming.strategy", env.getProperty("hibernate.naming.strategy"));
                 setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-                setProperty("hibernate.enable_lazy_load_no_trans", "true");
             }
         };
     }
