@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class TeamController {
     }
 
     @PostMapping
-    public void createTeam(@RequestBody TeamForm teamForm) {
+    public void createTeam(@RequestBody @Valid TeamForm teamForm) {
         teamService.save(teamForm.toTeam());
     }
 }

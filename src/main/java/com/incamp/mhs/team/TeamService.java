@@ -36,8 +36,6 @@ public class TeamService {
     public List<Team> getByTeamName(String teamName) {
         TeamSpecification teamSpecification = new TeamSpecification();
         teamSpecification.setOName(Optional.of(teamName));
-        Team newTeam = new Team();
-        newTeam.setName(teamName);
         return teamRepository.findBy(teamSpecification);
     }
 }

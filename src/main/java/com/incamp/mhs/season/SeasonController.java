@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/seasons")
 @Transactional
@@ -22,7 +24,7 @@ public class SeasonController {
     }
 
     @PostMapping()
-    public void createSeason(@RequestBody SeasonForm seasonForm){
+    public void createSeason(@RequestBody @Valid SeasonForm seasonForm) {
         Season season = seasonForm.toSeason();
         seasonService.save(season);
     }

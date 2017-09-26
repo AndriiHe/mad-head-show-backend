@@ -40,7 +40,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
         if (Objects.equals(authentication.getPrincipal(), userByUsername.getUsername()) && bCryptPasswordEncoder.matches(authentication.getCredentials().toString(), userByUsername.getPassword())) {
             Set<String> roles = userByUsername.getRoles().stream().map(Role::getAuthority).collect(Collectors.toSet());
             String token = JwtAuthHelper.createJwt(userByUsername.getId(), roles);
-            return new SsnJwtAuthentication(token);
+            return new JwtAuthentication(token);
         }
         throw new BadCredentialsException("auth error");
     }

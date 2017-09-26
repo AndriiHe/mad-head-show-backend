@@ -9,13 +9,13 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SsnJwtAuthentication implements Authentication {
+public class JwtAuthentication implements Authentication {
 
     private final String token;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public SsnJwtAuthentication(String token) {
+    public JwtAuthentication(String token) {
         this.token = token;
 
         DecodedJWT decodedJWT = JwtAuthHelper.verifyToken(token);

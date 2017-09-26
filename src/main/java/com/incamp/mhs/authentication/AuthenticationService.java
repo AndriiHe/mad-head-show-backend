@@ -1,6 +1,6 @@
 package com.incamp.mhs.authentication;
 
-import com.incamp.mhs.security.SsnJwtAuthentication;
+import com.incamp.mhs.security.JwtAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +19,6 @@ public class AuthenticationService {
 
     public String authenticate(LoginPasswordForm loginPasswordForm) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginPasswordForm.getLogin(), loginPasswordForm.getPassword()));
-        return ((SsnJwtAuthentication) authenticate).getToken();
+        return ((JwtAuthentication) authenticate).getToken();
     }
 }

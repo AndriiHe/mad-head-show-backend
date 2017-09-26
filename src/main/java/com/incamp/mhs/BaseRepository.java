@@ -1,7 +1,5 @@
 package com.incamp.mhs;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -47,7 +45,6 @@ public abstract class BaseRepository<Entity, Pk> {
         return entityManager.createQuery(userCriteriaQuery).getResultList();
     }
 
-    @Fetch(FetchMode.SELECT)
     public Optional<Entity> findOneByPk(Pk primaryKey) {
         return Optional.ofNullable(entityManager.find(entityClass, primaryKey));
     }

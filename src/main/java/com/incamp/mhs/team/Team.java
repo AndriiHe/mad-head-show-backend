@@ -6,7 +6,6 @@ import com.incamp.mhs.request.Request;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Collections;
 

@@ -76,8 +76,7 @@ public class Game {
 
     public interface MinimalView {}
 
-    public interface GameListView extends Season.MinimalView {
-    }
+    public interface GameListView extends Season.MinimalView {}
 
     public interface WithSeason extends MinimalView, Season.MinimalView {}
 
@@ -87,6 +86,5 @@ public class Game {
 
     public interface WithRequests extends MinimalView, Request.MinimalView {}
 
-    public interface WithScores extends MinimalView, QuizScore.MinimalView {
-    }
+    public interface WithScores extends MinimalView, QuizScore.MinimalView {}
 }

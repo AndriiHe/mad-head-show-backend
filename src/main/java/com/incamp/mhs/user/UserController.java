@@ -33,7 +33,7 @@ public class UserController {
         return userService.getByPk(userId);
     }
 
-    @GetMapping("currentUser")
+    @GetMapping("current")
     @JsonView(User.MinimalView.class)
     public User getCurrentUser(@CurrentUser User user) {
         return user;

@@ -3,6 +3,8 @@ package com.incamp.mhs.request;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/requests")
 public class RequestController {
@@ -20,12 +22,12 @@ public class RequestController {
     }
 
     @PostMapping
-    public void save(@RequestBody RequestCreateForm requestForm) {
+    public void save(@RequestBody @Valid RequestCreateForm requestForm) {
         requestService.save(requestForm.toRequest());
     }
 
     @PutMapping("{id}")
-    public void updateRequestStatus(@PathVariable long id, @RequestBody RequestUpdateForm requestForm) {
+    public void updateRequestStatus(@PathVariable long id, @RequestBody @Valid RequestUpdateForm requestForm) {
         requestService.update(id, requestForm.toRequest());
     }
 }

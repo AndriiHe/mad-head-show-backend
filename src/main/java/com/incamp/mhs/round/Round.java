@@ -14,7 +14,6 @@ import javax.persistence.*;
 @Table(name = "rounds")
 public class Round {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(MinimalView.class)
@@ -39,7 +38,7 @@ public class Round {
 
     @JsonView(GameView.class)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "game_id", nullable = false)
     private Game game;
 
     public interface MinimalView {}

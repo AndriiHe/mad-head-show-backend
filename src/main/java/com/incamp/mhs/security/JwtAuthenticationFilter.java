@@ -28,7 +28,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         }
 
         try {
-            SecurityContextHolder.getContext().setAuthentication(new SsnJwtAuthentication(token));
+            SecurityContextHolder.getContext().setAuthentication(new JwtAuthentication(token));
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (JWTVerificationException e) {
             httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

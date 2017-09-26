@@ -6,10 +6,11 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class TeamForm {
+
     @NotBlank
     private String name;
 
-    public Team toTeam(){
+    public Team toTeam() {
         Team team = new Team();
         team.setName(name);
         return team;

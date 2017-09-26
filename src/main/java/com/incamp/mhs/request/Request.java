@@ -38,7 +38,7 @@ public class Request {
     private LocalDate date;
 
     @JsonView(WithTeam.class)
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
 
     @JsonView(WithGame.class)

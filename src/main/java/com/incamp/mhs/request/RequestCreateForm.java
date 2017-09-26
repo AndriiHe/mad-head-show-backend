@@ -5,12 +5,13 @@ import com.incamp.mhs.team.Team;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
 public class RequestCreateForm {
 
-    @NotBlank
+    @NotNull
     private Long gameId;
 
     @NotBlank
@@ -19,7 +20,7 @@ public class RequestCreateForm {
     @NotBlank
     private String phone;
 
-    @NotBlank
+    @NotNull
     private Integer teamSize;
 
     @NotBlank

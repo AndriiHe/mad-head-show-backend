@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -38,7 +39,7 @@ public class GameController {
     }
 
     @PostMapping()
-    public void create(@RequestBody GameCreateForm gameCreateForm) {
+    public void create(@RequestBody @Valid GameCreateForm gameCreateForm) {
         gameService.save(gameCreateForm.toGame());
     }
 
@@ -61,7 +62,7 @@ public class GameController {
     }
 
     @PutMapping("{id}")
-    public void updateGame(@PathVariable long id, @RequestBody GameUpdateForm gameUpdateForm) {
+    public void updateGame(@PathVariable long id, @RequestBody @Valid GameUpdateForm gameUpdateForm) {
         gameService.update(id, gameUpdateForm.toGame());
     }
 }

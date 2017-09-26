@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -16,11 +17,11 @@ public class GameCreateForm {
     @NotBlank
     private String location;
 
-    @NotBlank
+    @NotNull
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate date;
 
-    @NotBlank
+    @NotNull
     @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
 

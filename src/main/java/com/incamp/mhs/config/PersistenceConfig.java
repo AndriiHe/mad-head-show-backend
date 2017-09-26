@@ -47,7 +47,7 @@ public class PersistenceConfig {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 
         em.setDataSource(restDataSource());
-        em.setPackagesToScan("com.incamp.mhs");
+        em.setPackagesToScan("com.incamp.mhs.*");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
