@@ -5,21 +5,16 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.core.annotation.AnnotationUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import java.beans.FeatureDescriptor;
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public abstract class BaseRepository<Entity, Pk> {
@@ -69,30 +64,5 @@ public abstract class BaseRepository<Entity, Pk> {
 
                 })
                 .toArray(String[]::new);
-    }
-
-    private <T> T findEager(Class<T> type, Object id) {
-        T entity = entityManager.find(type, id);
-
-        for (Field field : type.getDeclaredFields()) {
-            field.setAccessible(true);
-            Annotation[] annotations = field.getDeclaredAnnotations();
-
-            for (Annotation annotation : annotations) {
-                if (Objects.equals(annotation.annotationType(), ManyToOne.class)) {
-                    Map<String, Object> annotationAttributes = AnnotationUtils.getAnnotationAttributes(annotation);
-                    if (annotationAttributes.containsKey("fetch")) {
-                        if (Objects.equals(annotationAttributes.get("fetch").toString(), "LAZY")) {
-                            try {
-                                new PropertyDescriptor(field.getName(), type).getReadMethod().invoke(entity);
-                            } catch (IllegalAccessException | IntrospectionException | InvocationTargetException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return entity;
     }
 }

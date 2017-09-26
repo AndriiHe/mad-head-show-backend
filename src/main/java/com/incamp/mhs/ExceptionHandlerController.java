@@ -2,6 +2,7 @@ package com.incamp.mhs;
 
 import com.incamp.mhs.security.BadCredentialsException;
 import com.incamp.mhs.user.UserAlreadyExistsException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -30,6 +31,12 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(BadCredentialsException.class)
     public ExceptionInfo badCredentialsHandler(HttpServletRequest request, PersistenceException e) {
+        return new ExceptionInfo(request.getRequestURI(), e.getMessage());
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ExceptionInfo constraintViolation(HttpServletRequest request, PersistenceException e) {
         return new ExceptionInfo(request.getRequestURI(), e.getMessage());
     }
 }
