@@ -31,7 +31,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.POST, "/api/login");
+        web
+                .ignoring()
+                .antMatchers(HttpMethod.POST, "/api/login");
     }
 
     @Override
@@ -39,10 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable()
-                .authorizeRequests().and().formLogin().disable()
-                .logout()
-                .permitAll();
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+                .csrf().disable()
+                .authorizeRequests()
+            .and()
+                .formLogin().disable()
+                .logout().permitAll();
     }
 
     @Autowired
