@@ -24,7 +24,7 @@ public class SeasonController {
     }
 
     @PostMapping()
-    public void createSeason(@RequestBody @Valid SeasonForm seasonForm) {
+    public void create(@RequestBody @Valid SeasonForm seasonForm) {
         Season season = seasonForm.toSeason();
         seasonService.save(season);
     }

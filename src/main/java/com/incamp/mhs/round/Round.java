@@ -41,7 +41,7 @@ public class Round {
     @JoinColumn(name = "game_id", nullable = false)
     private Game game;
 
-    public interface MinimalView {}
+    public interface MinimalView extends RoundType.MinimalView {}
 
     public interface GameView extends MinimalView {}
 }

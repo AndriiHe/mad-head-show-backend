@@ -62,7 +62,7 @@ public class GameController {
     }
 
     @PutMapping("{id}")
-    public void updateGame(@PathVariable long id, @RequestBody @Valid GameUpdateForm gameUpdateForm) {
+    public void update(@PathVariable long id, @RequestBody @Valid GameUpdateForm gameUpdateForm) {
         gameService.update(id, gameUpdateForm.toGame());
     }
 }

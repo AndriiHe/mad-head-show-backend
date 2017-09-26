@@ -1,5 +1,6 @@
 package com.incamp.mhs.round;
 
+import com.incamp.mhs.game.Game;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,10 @@ public class RoundService {
     }
 
     @Transactional
-    public void save(Round round) {
+    public void save(Long gameId, Round round) {
+        Game game = new Game();
+        game.setId(gameId);
+        round.setGame(game);
         roundRepository.persist(round);
     }
 
@@ -26,7 +30,7 @@ public class RoundService {
         return roundRepository.findOneByPk(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Round> getByIndex(Long gameId, Integer index) {
         RoundSpecification roundSpecification = new RoundSpecification();
         roundSpecification.setOIndex(Optional.of(index));
@@ -34,6 +38,7 @@ public class RoundService {
         return roundRepository.findBy(roundSpecification);
     }
 
+    @Transactional(readOnly = true)
     public List<Round> getByGameId(Long gameId) {
         RoundSpecification roundSpecification = new RoundSpecification();
         roundSpecification.setOGameId(Optional.of(gameId));

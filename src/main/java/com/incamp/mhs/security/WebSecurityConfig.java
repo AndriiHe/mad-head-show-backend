@@ -39,14 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .csrf()
-                .disable()
-                .authorizeRequests()
-                .and()
-                .formLogin()
-                .disable()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable()
+                .authorizeRequests().and().formLogin().disable()
                 .logout()
                 .permitAll();
     }

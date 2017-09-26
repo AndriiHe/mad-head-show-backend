@@ -26,12 +26,12 @@ public class TeamController {
 
     @GetMapping
     @JsonView(Team.MinimalView.class)
-    public List<Team> getAllTeams() {
+    public List<Team> getAll() {
         return teamService.getAllTeams();
     }
 
     @PostMapping
-    public void createTeam(@RequestBody @Valid TeamForm teamForm) {
+    public void create(@RequestBody @Valid TeamForm teamForm) {
         teamService.save(teamForm.toTeam());
     }
 }
