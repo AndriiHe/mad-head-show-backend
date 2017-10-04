@@ -38,6 +38,8 @@ public class PersistenceConfig {
         dataSource.setUrl(env.getProperty("jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.username"));
         dataSource.setPassword(env.getProperty("jdbc.password"));
+        dataSource.setTestWhileIdle(Boolean.getBoolean(env.getProperty("datasource.test-while-idle")));
+        dataSource.setValidationQuery(env.getProperty("datasource.validation-query"));
 
         return dataSource;
     }
